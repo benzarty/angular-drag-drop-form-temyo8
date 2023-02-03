@@ -1,0 +1,3 @@
+<li *ngFor="let item of inputControls" class="list-group-item">
+	<input [type]="item.inputType" [placeholder]="item.placeholder" /> <label *ngIf="item.displayText">{{item.displayText}}</label>
+</li>

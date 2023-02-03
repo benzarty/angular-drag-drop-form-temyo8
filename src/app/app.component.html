@@ -1,0 +1,75 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" *ngIf="display">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" (click)="display=false;">&times;</span>
+      <h2>Input properties updater</h2>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      Place holder: <input type="text" [(ngModel)]="modalPopupObject.placeholder" name="placeholder"/><br/><br/><br/>
+      <button type="submit" class="btn btn-success" [disabled]="!f.form.valid">Submit</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+<!-- {{now}} -->
+<h3>Complete Demo</h3>
+<p>This is a complete demo that features drop scopes, custom styling, disable drag/drop & drag handles.</p>
+<hr>
+
+<div class="row">
+
+	<div class="col-sm-3">
+		<div class="card card-outline-success mb-3">
+			<div class="card-header card-inverse card-success">
+				Input Items
+			</div>
+			<div class="card-block scroll-list">
+				<div #formData class="list-group">
+					<li class="list-group-item list-group-item-action list-group-item-success" [draggable] *ngFor="let item of vegetables" [dragClass]="'active'"
+					 [dragData]="item" [dragScope]="item.type" [dragEnabled]="dragEnabled">
+						{{item.name}}
+					</li>
+				</div>
+			</div>
+
+			<div class="card-footer">
+				<div class="form-check">
+					<label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" title="Drag Enabled" [(ngModel)]="dragEnabled">
+                  Drag Enabled
+                </label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-5">
+		<div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border'" [dropScope]="['label', 'input-text','input-check']"
+		 [dragHintClass]="'drag-hint'" (onDrop)="onAnyDrop($event)">
+			<div class="card-header card-inverse card-primary">Drop the controls on the form</div>
+			<div class="card-block scroll-list" id="formContent">
+				<div class="row">
+					<div [class]="col-sm-3">
+						<li *ngFor="let item of droppedItems" class="list-group-item">
+							<input [type]="item.inputType" [placeholder]="item.placeholder" *ngIf="item.inputType !== 'label'">
+              <label *ngIf="item.inputType === 'label'"></label>
+               <label *ngIf="item.displayText"></label>
+						</li>						
+					</div>
+          <div [innerHTML]="test"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+    {{test}}
+	</div>
+</div>
